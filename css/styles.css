@@ -1,7 +1,7 @@
 /* ==========================================================================
    Contador de Truco — AED1 (Projeto N1 & N2)
-   Design System: Crimson & Obsidian (Vermelho e Preto Autêntico)
-   Estética de baralho de truco, tipografia editorial de impacto e alto contraste
+   Design System: Crimson & Obsidian (Vermelho e Preto)
+   Tipografia: Segoe UI / Aptos / Outlook Style (Proporcional, Nítida e Sem Deformação)
    ========================================================================== */
 
 :root {
@@ -9,7 +9,7 @@
   --bg-app: #060608;
   --bg-surface-1: #0d0d10;
   --bg-surface-2: #141418;
-  --bg-surface-hover: #1c1c22;
+  --bg-surface-hover: #1f1f26;
   
   /* Vermelhos Principais (Crimson, Ruby, Scarlet) */
   --red-primary: #dc2626;
@@ -43,11 +43,12 @@
   --gold-accent: #f59e0b;
   --emerald-accent: #10b981;
 
-  /* Fontes Autênticas (Não parecendo IA) */
-  --font-display: 'Syne', sans-serif;
-  --font-score: 'Bebas Neue', 'Impact', sans-serif;
-  --font-ui: 'Space Grotesk', -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  /* Tipografia Padrão Outlook (Segoe UI / Aptos / Proporcional e Legível) */
+  --font-main: 'Segoe UI', 'Aptos', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Segoe UI', 'Aptos', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  --font-score: 'Segoe UI', 'Aptos', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  --font-ui: 'Segoe UI', 'Aptos', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Segoe UI Mono', 'Consolas', monospace;
 
   /* Raios e Formatos */
   --radius-xs: 6px;
@@ -72,7 +73,7 @@
 }
 
 body {
-  font-family: var(--font-ui);
+  font-family: var(--font-main);
   background-color: var(--bg-app);
   color: var(--text-high);
   min-height: 100vh;
@@ -153,17 +154,17 @@ button, input {
 }
 
 .app-title {
-  font-family: var(--font-display);
+  font-family: var(--font-main);
   font-size: 1.35rem;
-  font-weight: 900;
-  letter-spacing: 0.06em;
+  font-weight: 800;
+  letter-spacing: 0.02em;
   color: var(--text-pure);
   line-height: 1;
 }
 
 .academic-badge {
   font-size: 0.65rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   font-weight: 700;
   color: var(--red-bright);
   background: rgba(220, 38, 38, 0.12);
@@ -171,7 +172,7 @@ button, input {
   padding: 0.15rem 0.5rem;
   border-radius: var(--radius-pill);
   width: fit-content;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
@@ -185,15 +186,16 @@ button, input {
   background: var(--bg-surface-2);
   border: 1px solid var(--border-subtle);
   color: var(--text-mid);
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: 1.05rem;
   cursor: pointer;
   transition: var(--transition-fast);
+  position: relative;
 }
 
 .icon-btn:hover {
@@ -207,6 +209,22 @@ button, input {
   transform: translateY(1px);
 }
 
+/* Ícone de Volume Customizado */
+.volume-btn-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: invert(1);
+  display: block;
+  transition: var(--transition-fast);
+  pointer-events: none;
+}
+
+.icon-btn.muted .volume-btn-img {
+  opacity: 0.3;
+  filter: invert(1) grayscale(1);
+}
+
 /* ==========================================================================
    Banner de Alertas (Mão de 11 / Mão de Ferro)
    ========================================================================== */
@@ -217,10 +235,10 @@ button, input {
   gap: 0.6rem;
   padding: 0.75rem 1.25rem;
   border-radius: var(--radius-sm);
-  font-family: var(--font-display);
+  font-family: var(--font-main);
   font-size: 0.9rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   border: 1px solid transparent;
 }
 
@@ -317,10 +335,10 @@ button, input {
   background: transparent;
   border: none;
   color: var(--text-pure);
-  font-family: var(--font-display);
+  font-family: var(--font-main);
   font-size: 1.15rem;
-  font-weight: 900;
-  letter-spacing: 0.04em;
+  font-weight: 800;
+  letter-spacing: 0.02em;
   max-width: 130px;
   outline: none;
   text-transform: uppercase;
@@ -339,7 +357,7 @@ button, input {
 
 .win-badge {
   font-size: 0.72rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   font-weight: 700;
   padding: 0.2rem 0.6rem;
   border-radius: var(--radius-pill);
@@ -356,7 +374,7 @@ button, input {
   font-weight: 800;
 }
 
-/* Placar Gigante (Bebas Neue) */
+/* Placar Proporcional Outlook Style (Sem Deformação/Estiramento) */
 .score-display-wrapper {
   margin: 0.4rem 0 0.8rem 0;
   display: flex;
@@ -366,23 +384,23 @@ button, input {
 }
 
 .score-number {
-  font-family: var(--font-score);
-  font-size: 6.2rem;
-  font-weight: 400;
-  line-height: 0.9;
-  letter-spacing: 0.02em;
+  font-family: var(--font-main);
+  font-size: 5.2rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
   color: var(--text-pure);
-  text-shadow: 0 0 30px rgba(220, 38, 38, 0.35);
+  text-shadow: 0 0 25px rgba(220, 38, 38, 0.35);
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .score-points-label {
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  font-weight: 800;
+  font-family: var(--font-main);
+  font-size: 0.75rem;
+  font-weight: 700;
   color: var(--red-bright);
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.1em;
   margin-top: -0.2rem;
   margin-bottom: 1.25rem;
 }
@@ -413,19 +431,19 @@ button, input {
 }
 
 .btn-point span.val {
-  font-family: var(--font-display);
+  font-family: var(--font-main);
   font-size: 1.15rem;
-  font-weight: 900;
+  font-weight: 800;
   line-height: 1.1;
   color: var(--text-pure);
 }
 
 .btn-point span.label {
-  font-size: 0.62rem;
-  font-weight: 700;
+  font-size: 0.65rem;
+  font-weight: 600;
   color: var(--text-mid);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
 }
 
 .btn-point:hover {
@@ -478,9 +496,9 @@ button, input {
 }
 
 .vs-badge {
-  font-family: var(--font-display);
+  font-family: var(--font-main);
   font-size: 0.95rem;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--red-bright);
   background: var(--bg-surface-1);
   border: 1px solid var(--border-red);
@@ -494,7 +512,7 @@ button, input {
 }
 
 .round-counter-tag {
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   font-size: 0.78rem;
   font-weight: 700;
   color: #fff;
@@ -526,9 +544,9 @@ button, input {
   color: var(--text-high);
   padding: 0.65rem 1.25rem;
   border-radius: var(--radius-sm);
-  font-family: var(--font-display);
+  font-family: var(--font-main);
   font-size: 0.88rem;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -598,9 +616,9 @@ button, input {
 }
 
 .tad-name {
-  font-family: var(--font-display);
+  font-family: var(--font-main);
   font-size: 0.9rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--text-high);
   display: flex;
   align-items: center;
@@ -648,7 +666,7 @@ button, input {
 
 .role-badge {
   font-size: 0.65rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   font-weight: 700;
   padding: 0.12rem 0.45rem;
   border-radius: var(--radius-pill);
@@ -755,9 +773,9 @@ button, input {
 }
 
 .modal-title {
-  font-family: var(--font-display);
+  font-family: var(--font-main);
   font-size: 1.75rem;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: -0.01em;
   margin-bottom: 0.4rem;
   color: var(--text-pure);
@@ -773,8 +791,8 @@ button, input {
   background: linear-gradient(135deg, #b91c1c, #dc2626);
   border: 1px solid #ef4444;
   color: #fff;
-  font-family: var(--font-display);
-  font-weight: 900;
+  font-family: var(--font-main);
+  font-weight: 800;
   font-size: 0.95rem;
   padding: 0.85rem 1.75rem;
   border-radius: var(--radius-sm);
@@ -823,9 +841,9 @@ button, input {
 }
 
 .db-modal-heading {
-  font-family: var(--font-display);
+  font-family: var(--font-main);
   font-size: 1.2rem;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--text-pure);
 }
 
@@ -863,9 +881,9 @@ button, input {
   background: transparent;
   border: none;
   color: var(--text-mid);
-  font-family: var(--font-display);
+  font-family: var(--font-main);
   font-size: 0.82rem;
-  font-weight: 800;
+  font-weight: 700;
   padding: 0.5rem 0.8rem;
   border-radius: 4px;
   cursor: pointer;
@@ -916,7 +934,7 @@ button, input {
 
 .db-winner-tag {
   font-size: 0.7rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   font-weight: 700;
   padding: 0.15rem 0.5rem;
   border-radius: var(--radius-pill);
@@ -929,7 +947,7 @@ button, input {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: var(--font-display);
+  font-family: var(--font-main);
   font-size: 1.1rem;
   font-weight: 800;
   margin-bottom: 0.4rem;
@@ -1002,8 +1020,8 @@ button, input {
 
 .db-stat-val {
   font-size: 1.5rem;
-  font-weight: 900;
-  font-family: var(--font-display);
+  font-weight: 800;
+  font-family: var(--font-main);
   color: var(--red-bright);
 }
 
@@ -1014,9 +1032,9 @@ button, input {
 }
 
 .db-ranking-heading {
-  font-family: var(--font-display);
+  font-family: var(--font-main);
   font-size: 0.95rem;
-  font-weight: 900;
+  font-weight: 800;
   margin-bottom: 0.45rem;
 }
 
@@ -1045,9 +1063,9 @@ button, input {
   background: rgba(220, 38, 38, 0.15);
   border: 1px solid var(--red-primary);
   color: #fda4af;
-  font-family: var(--font-display);
+  font-family: var(--font-main);
   font-size: 0.8rem;
-  font-weight: 800;
+  font-weight: 700;
   padding: 0.55rem 1rem;
   border-radius: var(--radius-xs);
   cursor: pointer;
@@ -1068,9 +1086,9 @@ button, input {
   border: 1px solid var(--red-primary);
   box-shadow: 0 8px 24px var(--red-glow);
   color: var(--text-pure);
-  font-family: var(--font-display);
+  font-family: var(--font-main);
   font-size: 0.85rem;
-  font-weight: 800;
+  font-weight: 700;
   padding: 0.65rem 1.4rem;
   border-radius: var(--radius-pill);
   pointer-events: none;
@@ -1136,9 +1154,14 @@ button, input {
   }
 
   .icon-btn {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     font-size: 0.9rem;
+  }
+
+  .volume-btn-img {
+    width: 18px;
+    height: 18px;
   }
 
   .alert-banner {
@@ -1197,7 +1220,7 @@ button, input {
 
   .team-name-input {
     font-size: 16px; /* Evita auto-zoom no Safari iOS */
-    font-weight: 900;
+    font-weight: 800;
     max-width: 100%;
     width: 100%;
     text-align: left;
@@ -1214,7 +1237,7 @@ button, input {
   }
 
   .score-number {
-    font-size: clamp(3.2rem, 13vw, 4.8rem);
+    font-size: clamp(3rem, 11vw, 4.4rem);
   }
 
   .score-points-label {
@@ -1282,9 +1305,9 @@ button, input {
     background: transparent;
     border: none;
     color: var(--text-mid);
-    font-family: var(--font-display);
+    font-family: var(--font-main);
     font-size: 0.78rem;
-    font-weight: 800;
+    font-weight: 700;
     padding: 0.5rem 0.2rem;
     border-radius: 4px;
     cursor: pointer;
@@ -1361,7 +1384,7 @@ button, input {
   }
 
   .score-number {
-    font-size: 2.8rem;
+    font-size: 2.7rem;
   }
 
   .btn-point {

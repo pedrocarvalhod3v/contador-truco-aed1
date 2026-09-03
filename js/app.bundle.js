@@ -1082,7 +1082,13 @@ if (btnResetAll) {
 if (btnToggleSound) {
   btnToggleSound.addEventListener('click', () => {
     somHabilitado = !somHabilitado;
-    btnToggleSound.textContent = somHabilitado ? '🔊' : '🔇';
+    if (somHabilitado) {
+      btnToggleSound.classList.remove('muted');
+      btnToggleSound.title = "Desativar Sons Táteis";
+    } else {
+      btnToggleSound.classList.add('muted');
+      btnToggleSound.title = "Ativar Sons Táteis";
+    }
   });
 }
 
