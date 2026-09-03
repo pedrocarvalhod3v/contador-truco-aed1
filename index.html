@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contador de Truco — Algoritmos e Estruturas de Dados I (AED1)</title>
+  <meta name="description" content="Contador de Truco acadêmico desenvolvido para a disciplina de AED1 com implementação explícita de TAD Lista, TAD Pilha (Undo/Redo) e TAD Fila (Mesa).">
+  
+  <!-- Google Fonts: Outfit, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Favicon e Ícones Mobile -->
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+  <link rel="apple-touch-icon" href="assets/logo.jpg">
+  
+  <!-- Configurações PWA (Progressive Web App para Celular / APK) -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0a0e17">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Contador Truco">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Cabeçalho com Identificação Acadêmica e Logo Oficial -->
+    <header class="app-header">
+      <div class="logo-area">
+        <img src="assets/logo.jpg" alt="Logo Truco" class="app-logo-img">
+        <div>
+          <h1 class="app-title">Contador de Truco</h1>
+          <span class="academic-badge">AED1 • Projeto N1 & N2</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="btn-install-app" class="icon-btn" style="display:none;" title="Instalar Aplicativo no Celular" aria-label="Instalar no celular">
+          📲
+        </button>
+        <button id="btn-save-game" class="icon-btn" title="Salvar Partida Atual (Snapshot)" aria-label="Salvar jogo">
+          💾
+        </button>
+        <button id="btn-load-game" class="icon-btn" title="Carregar Partida Salva" aria-label="Carregar jogo">
+          📂
+        </button>
+        <button id="btn-open-db" class="icon-btn" title="Banco de Dados & Histórico de Partidas" aria-label="Abrir banco de dados">
+          🗄️
+        </button>
+        <button id="btn-toggle-sound" class="icon-btn" title="Ativar/Desativar Sons Táteis" aria-label="Alternar som">
+          🔊
+        </button>
+        <button id="btn-reset-all" class="icon-btn" title="Reiniciar Placar e Estatísticas" aria-label="Reiniciar tudo">
+          🔄
+        </button>
+      </div>
+    </header>
+
+    <!-- Banner Dinâmico para Mão de 11 / Mão de Ferro -->
+    <section id="alert-banner" class="alert-banner" role="alert" aria-live="polite">
+      <span id="alert-icon">⚠️</span>
+      <span id="alert-text">Mão de 11! Não é permitido pedir truco.</span>
+    </section>
+
+    <!-- Grade Principal do Placar -->
+    <main class="scoreboard-grid" id="main-scoreboard">
+      
+      <!-- Card Equipe A -->
+      <section class="team-card team-a" id="card-team-a" aria-label="Placar Equipe A">
+        <div class="team-header">
+          <div class="team-name-wrapper" title="Clique para personalizar o nome da equipe">
+            <input type="text" id="input-team-a" class="team-name-input" value="NÓS" maxlength="16" placeholder="Equipe A" aria-label="Nome da Equipe A">
+            <span class="edit-icon" aria-hidden="true">✏️</span>
+          </div>
+          <div class="win-badge" title="Vitórias Acumuladas">
+            🏆 <span id="wins-a" class="win-count">0</span>
+          </div>
+        </div>
+
+        <div class="score-display-wrapper">
+          <div id="score-a" class="score-number" aria-live="polite">0</div>
+        </div>
+        <div class="score-points-label">Tentos</div>
+
+        <!-- Botões de Pontuação Equipe A -->
+        <div class="action-buttons-grid">
+          <button id="btn-a-1" class="btn-point" data-team="A" data-val="1" aria-label="Adicionar 1 ponto para Equipe A">
+            <span class="val">+1</span>
+            <span class="label">Mão</span>
+          </button>
+          <button id="btn-a-3" class="btn-point" data-team="A" data-val="3" aria-label="Adicionar 3 pontos de Truco para Equipe A">
+            <span class="val">+3</span>
+            <span class="label">Truco</span>
+          </button>
+          <button id="btn-a-6" class="btn-point" data-team="A" data-val="6" aria-label="Adicionar 6 pontos de Seis para Equipe A">
+            <span class="val">+6</span>
+            <span class="label">Seis</span>
+          </button>
+          <button id="btn-a-9" class="btn-point" data-team="A" data-val="9" aria-label="Adicionar 9 pontos de Nove para Equipe A">
+            <span class="val">+9</span>
+            <span class="label">Nove</span>
+          </button>
+          <button id="btn-a-12" class="btn-point btn-doze" data-team="A" data-val="12" aria-label="Adicionar 12 pontos de Doze para Equipe A">
+            <span class="val">+12</span>
+            <span class="label">Doze (Queda)</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Divisor e Indicador de Rodada -->
+      <aside class="match-center-info" aria-label="Status da Rodada">
+        <div class="vs-badge">VS</div>
+        <span id="round-badge" class="round-counter-tag">Mão #1</span>
+      </aside>
+
+      <!-- Card Equipe B -->
+      <section class="team-card team-b" id="card-team-b" aria-label="Placar Equipe B">
+        <div class="team-header">
+          <div class="team-name-wrapper" title="Clique para personalizar o nome da equipe">
+            <input type="text" id="input-team-b" class="team-name-input" value="ELES" maxlength="16" placeholder="Equipe B" aria-label="Nome da Equipe B">
+            <span class="edit-icon" aria-hidden="true">✏️</span>
+          </div>
+          <div class="win-badge" title="Vitórias Acumuladas">
+            🏆 <span id="wins-b" class="win-count">0</span>
+          </div>
+        </div>
+
+        <div class="score-display-wrapper">
+          <div id="score-b" class="score-number" aria-live="polite">0</div>
+        </div>
+        <div class="score-points-label">Tentos</div>
+
+        <!-- Botões de Pontuação Equipe B -->
+        <div class="action-buttons-grid">
+          <button id="btn-b-1" class="btn-point" data-team="B" data-val="1" aria-label="Adicionar 1 ponto para Equipe B">
+            <span class="val">+1</span>
+            <span class="label">Mão</span>
+          </button>
+          <button id="btn-b-3" class="btn-point" data-team="B" data-val="3" aria-label="Adicionar 3 pontos de Truco para Equipe B">
+            <span class="val">+3</span>
+            <span class="label">Truco</span>
+          </button>
+          <button id="btn-b-6" class="btn-point" data-team="B" data-val="6" aria-label="Adicionar 6 pontos de Seis para Equipe B">
+            <span class="val">+6</span>
+            <span class="label">Seis</span>
+          </button>
+          <button id="btn-b-9" class="btn-point" data-team="B" data-val="9" aria-label="Adicionar 9 pontos de Nove para Equipe B">
+            <span class="val">+9</span>
+            <span class="label">Nove</span>
+          </button>
+          <button id="btn-b-12" class="btn-point btn-doze" data-team="B" data-val="12" aria-label="Adicionar 12 pontos de Doze para Equipe B">
+            <span class="val">+12</span>
+            <span class="label">Doze (Queda)</span>
+          </button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Barra de Controle Global: Undo / Redo / Nova Partida -->
+    <section class="global-controls-bar" aria-label="Ações Rápidas">
+      <button id="btn-undo" class="control-btn" disabled aria-label="Desfazer última pontuação">
+        <span>⏪</span> Desfazer (Undo)
+      </button>
+      <button id="btn-redo" class="control-btn" disabled aria-label="Refazer pontuação desfeita">
+        <span>⏩</span> Refazer (Redo)
+      </button>
+      <button id="btn-new-match" class="control-btn btn-reset" aria-label="Iniciar nova partida">
+        <span>🆕</span> Nova Partida
+      </button>
+    </section>
+
+    <!-- Dashboard de TADs (Estruturas de Dados AED1 em Tempo Real) -->
+    <section class="tads-dashboard-container" aria-label="Estruturas de Dados do Jogo">
+      
+      <!-- TAD Fila Circular: Gestão da Mesa e Turnos -->
+      <article class="tad-card" id="tad-fila-card">
+        <header class="tad-card-header">
+          <h2 class="tad-name"><span>🔄</span> Mesa (TAD Fila)</h2>
+          <span class="tad-tag">FIFO • O(1)</span>
+        </header>
+        <div id="mesa-list" class="mesa-visualizer">
+          <!-- Renderizado dinamicamente via JS -->
+        </div>
+      </article>
+
+      <!-- TAD Pilha: Histórico de Snapshots para Undo/Redo -->
+      <article class="tad-card" id="tad-pilha-card">
+        <header class="tad-card-header">
+          <h2 class="tad-name"><span>🥞</span> Snapshots (TAD Pilha)</h2>
+          <span class="tad-tag">LIFO • O(1)</span>
+        </header>
+        <div id="stack-list" class="stack-visualizer">
+          <!-- Renderizado dinamicamente via JS -->
+        </div>
+      </article>
+
+      <!-- TAD Lista Encadeada: Histórico das Mãos Jogadas -->
+      <article class="tad-card" id="tad-lista-card">
+        <header class="tad-card-header">
+          <h2 class="tad-name"><span>📜</span> Histórico (TAD Lista)</h2>
+          <span class="tad-tag">Dinâmica • O(N)</span>
+        </header>
+        <div id="history-list" class="history-list">
+          <!-- Renderizado dinamicamente via JS -->
+        </div>
+      </article>
+
+    </section>
+
+  </div>
+
+  <!-- Modal de Vitória com Efeitos -->
+  <div id="victory-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="victory-title">
+    <div class="modal-card">
+      <div class="modal-trophy">🏆</div>
+      <h2 id="victory-title" class="modal-title">FIM DE JOGO!</h2>
+      <p id="victory-message" class="modal-subtitle">A equipe NÓS venceu a partida atingindo 12 tentos!</p>
+      <button id="btn-modal-new-game" class="modal-btn">Jogar Próxima Queda</button>
+    </div>
+  </div>
+
+  <!-- Modal de Banco de Dados & Histórico de Partidas -->
+  <div id="db-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="db-modal-title">
+    <div class="modal-card modal-db">
+      <div class="db-modal-header">
+        <div class="db-title-area">
+          <img src="assets/logo.jpg" alt="Logo Truco" class="db-logo-img">
+          <div>
+            <h2 id="db-modal-title" class="db-modal-heading">Banco de Dados & Histórico</h2>
+            <span class="db-modal-sub">Persistência Relacional & Métricas do Jogo</span>
+          </div>
+        </div>
+        <button id="btn-close-db-x" class="btn-close-modal" aria-label="Fechar modal">&times;</button>
+      </div>
+
+      <!-- Abas do Banco de Dados -->
+      <nav class="db-tabs-nav" aria-label="Navegação do Banco">
+        <button id="tab-btn-matches" class="db-tab-btn active">📜 Partidas Arquivadas</button>
+        <button id="tab-btn-stats" class="db-tab-btn">📊 Estatísticas & Ranking</button>
+      </nav>
+
+      <!-- Conteúdo da Aba: Partidas Arquivadas -->
+      <div id="tab-content-matches" class="db-tab-content active">
+        <div id="db-matches-list" class="db-matches-container">
+          <!-- Renderizado dinamicamente via JS -->
+        </div>
+      </div>
+
+      <!-- Conteúdo da Aba: Estatísticas Globais -->
+      <div id="tab-content-stats" class="db-tab-content">
+        <div id="db-stats-view" class="db-stats-container">
+          <!-- Renderizado dinamicamente via JS -->
+        </div>
+      </div>
+
+      <!-- Rodapé do Modal com Ações -->
+      <div class="db-modal-footer">
+        <button id="btn-clear-db" class="btn-db-danger">🗑️ Limpar Banco</button>
+        <button id="btn-close-db-modal" class="modal-btn">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notificação Toast Flutuante -->
+  <div id="toast-notification" class="toast-notification" role="status" aria-live="polite"></div>
+
+  <!-- Controlador da Aplicação (Compatível com duplo-clique no arquivo e servidor HTTP) -->
+  <script src="js/app.bundle.js"></script>
+</body>
+</html>

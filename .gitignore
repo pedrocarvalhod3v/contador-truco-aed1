@@ -1,0 +1,21 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches e Ambientes Virtuais
+.venv/
+env/
+venv/
+ENV/
+
+# IDEs e Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS específicos
+Thumbs.db
+Desktop.ini
+.DS_Store
