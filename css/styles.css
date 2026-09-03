@@ -209,10 +209,26 @@ button, input {
   transform: translateY(1px);
 }
 
-/* Ícone de Volume Customizado */
-.volume-btn-img {
+/* Ícones Customizados do Header (Salvar, Carregar, Volume, Recarregar) */
+.header-action-img {
+  width: 19px;
+  height: 19px;
+  object-fit: contain;
+  filter: invert(1);
+  display: block;
+  pointer-events: none;
+  transition: var(--transition-fast);
+}
+
+.header-action-img.header-folder-img {
+  filter: none;
   width: 20px;
   height: 20px;
+}
+
+.volume-btn-img {
+  width: 19px;
+  height: 19px;
   object-fit: contain;
   filter: invert(1);
   display: block;
@@ -1159,7 +1175,13 @@ button, input {
     font-size: 0.9rem;
   }
 
-  .volume-btn-img {
+  .volume-btn-img,
+  .header-action-img {
+    width: 17px;
+    height: 17px;
+  }
+
+  .header-action-img.header-folder-img {
     width: 18px;
     height: 18px;
   }
