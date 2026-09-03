@@ -682,26 +682,39 @@ class GeradorSons {
     }
   }
 
+  vibrar(padrao = 35) {
+    if (typeof navigator !== 'undefined' && navigator.vibrate) {
+      try {
+        navigator.vibrate(padrao);
+      } catch (e) {}
+    }
+  }
+
   tocarClique() {
+    this.vibrar(25);
     this.beep(600, 'triangle', 0.04);
   }
 
   tocarPonto() {
+    this.vibrar(40);
     this.beep(520, 'sine', 0.12);
     setTimeout(() => this.beep(780, 'sine', 0.15), 80);
   }
 
   tocarTruco() {
+    this.vibrar([40, 60, 80]);
     this.beep(400, 'square', 0.1);
     setTimeout(() => this.beep(600, 'square', 0.1), 80);
     setTimeout(() => this.beep(900, 'square', 0.2), 160);
   }
 
   tocarUndo() {
+    this.vibrar(30);
     this.beep(350, 'sawtooth', 0.08);
   }
 
   tocarVitoria() {
+    this.vibrar([100, 50, 100, 50, 200]);
     const notas = [523.25, 659.25, 783.99, 1046.50];
     notas.forEach((nota, i) => {
       setTimeout(() => this.beep(nota, 'triangle', 0.25), i * 120);
@@ -1176,6 +1189,31 @@ if (btnModalNewGame) {
     partida.novaPartida();
     partidaSalvaNoHistorico = false;
     atualizarInterface();
+  });
+}
+
+// Gerenciamento de Abas Mobile para TADs
+const tadTabBtns = document.querySelectorAll('.tad-tab-btn');
+if (tadTabBtns.length > 0) {
+  tadTabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tadTabBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      const targetId = btn.getAttribute('data-target');
+
+      document.querySelectorAll('.tad-card').forEach(card => {
+        if (card.id === targetId) {
+          card.classList.add('mobile-visible');
+        } else {
+          card.classList.remove('mobile-visible');
+        }
+      });
+      audio.tocarClique();
+    });
   });
 }
 

@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Contador de Truco — Algoritmos e Estruturas de Dados I (AED1)</title>
   <meta name="description" content="Contador de Truco acadêmico desenvolvido para a disciplina de AED1 com implementação explícita de TAD Lista, TAD Pilha (Undo/Redo) e TAD Fila (Mesa).">
   
@@ -174,10 +174,16 @@
     </section>
 
     <!-- Dashboard de TADs (Estruturas de Dados AED1 em Tempo Real) -->
+    <div class="tads-mobile-nav" id="tads-mobile-nav" role="tablist" aria-label="Abas de Estruturas de Dados">
+      <button class="tad-tab-btn active" data-target="tad-fila-card" role="tab" aria-selected="true"><span>🔄</span> Mesa</button>
+      <button class="tad-tab-btn" data-target="tad-pilha-card" role="tab" aria-selected="false"><span>🥞</span> Snapshots</button>
+      <button class="tad-tab-btn" data-target="tad-lista-card" role="tab" aria-selected="false"><span>📜</span> Histórico</button>
+    </div>
+
     <section class="tads-dashboard-container" aria-label="Estruturas de Dados do Jogo">
       
       <!-- TAD Fila Circular: Gestão da Mesa e Turnos -->
-      <article class="tad-card" id="tad-fila-card">
+      <article class="tad-card mobile-visible" id="tad-fila-card">
         <header class="tad-card-header">
           <h2 class="tad-name"><span>🔄</span> Mesa (TAD Fila)</h2>
           <span class="tad-tag">FIFO • O(1)</span>
