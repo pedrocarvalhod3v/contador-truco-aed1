@@ -1,52 +1,67 @@
 /* ==========================================================================
-   Design System - Contador de Truco (AED1: N1 & N2)
-   Estética: Cyber-Dark Premium, Glassmorphism & Micro-interações
+   Contador de Truco — AED1 (Projeto N1 & N2)
+   Design System: Obsidian & Petrol Minimalist Slate (Autêntico & Não-Genérico)
+   Inspirado na estética clássica de jogos de cartas com tipografia editorial suíça
    ========================================================================== */
 
 :root {
-  /* Paleta de Cores HSL */
-  --bg-primary: #0a0e17;
-  --bg-secondary: #111827;
-  --bg-card: rgba(17, 24, 39, 0.75);
-  --bg-card-hover: rgba(31, 41, 55, 0.85);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-glow: rgba(99, 102, 241, 0.15);
-
-  --text-primary: #f9fafb;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
-
-  /* Cores de Destaque */
-  --accent-cyan: #06b6d4;
-  --accent-cyan-glow: rgba(6, 182, 212, 0.35);
-  --accent-indigo: #6366f1;
-  --accent-purple: #8b5cf6;
+  /* Paleta Base: Obsidian & Slate Escuro */
+  --bg-app: #080b0e;
+  --bg-surface-1: #0e141a;
+  --bg-surface-2: #141c24;
+  --bg-surface-hover: #1a2530;
   
-  --team-a-color: #38bdf8;
-  --team-a-gradient: linear-gradient(135deg, #0284c7, #38bdf8);
-  --team-a-glow: rgba(56, 189, 248, 0.35);
+  /* Linhas e Contornos Finitos (Hairline Borders) */
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-active: rgba(255, 255, 255, 0.16);
+  --border-glow: rgba(45, 212, 191, 0.2);
 
-  --team-b-color: #f43f5e;
-  --team-b-gradient: linear-gradient(135deg, #e11d48, #fb7185);
-  --team-b-glow: rgba(244, 63, 94, 0.35);
+  /* Tipografia */
+  --text-pure: #ffffff;
+  --text-high: #f1f5f9;
+  --text-mid: #94a3b8;
+  --text-dim: #526173;
 
-  --warning-gold: #f59e0b;
-  --warning-glow: rgba(245, 158, 11, 0.4);
-  --success-emerald: #10b981;
+  /* Identidade Visual Autêntica (Inspirada no Selo Oficial) */
+  --petrol-accent: #2dd4bf;
+  --petrol-dark: #132b36;
+  --petrol-glow: rgba(45, 212, 191, 0.15);
 
-  /* Fontes e Raios */
-  --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Equipes com Cores Precisas e Não-Saturadas */
+  --team-a-core: #38bdf8;
+  --team-a-bg: rgba(56, 189, 248, 0.04);
+  --team-a-border: rgba(56, 189, 248, 0.25);
+  --team-a-tint: #0e2938;
+
+  --team-b-core: #fb7185;
+  --team-b-bg: rgba(251, 113, 133, 0.04);
+  --team-b-border: rgba(251, 113, 133, 0.25);
+  --team-b-tint: #381520;
+
+  /* Alertas & Status */
+  --gold-accent: #fbbf24;
+  --gold-bg: rgba(251, 191, 36, 0.08);
+  --emerald-accent: #34d399;
+
+  /* Tipografia */
+  --font-editorial: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
-  --shadow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.5), 0 0 1px 1px var(--glass-border);
-  --shadow-neon: 0 0 25px var(--glass-glow);
-  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Geometria Minimalista */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-pill: 9999px;
+
+  /* Sombras Precisas */
+  --shadow-slate: 0 4px 24px -2px rgba(0, 0, 0, 0.7), 0 0 0 1px var(--border-subtle);
+  --shadow-raised: 0 8px 32px -4px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--border-active);
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Reset Global */
+/* Reset Global & Otimização Touch */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -55,9 +70,9 @@
 }
 
 body {
-  font-family: var(--font-main);
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  font-family: var(--font-editorial);
+  background-color: var(--bg-app);
+  color: var(--text-high);
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
@@ -65,43 +80,47 @@ body {
   align-items: center;
   overflow-x: hidden;
   position: relative;
+  /* Fundo sutil texturizado com iluminação focal petrol */
   background-image: 
-    radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
-    radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.1) 0%, transparent 45%),
-    radial-gradient(circle at 50% 50%, rgba(244, 63, 94, 0.05) 0%, transparent 60%);
+    radial-gradient(circle at 50% 0%, rgba(45, 212, 191, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 10% 90%, rgba(56, 189, 248, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 90% 90%, rgba(251, 113, 133, 0.04) 0%, transparent 40%);
   background-attachment: fixed;
   padding-top: env(safe-area-inset-top, 0px);
-  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
   padding-left: env(safe-area-inset-left, 0px);
   padding-right: env(safe-area-inset-right, 0px);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 button, input {
   touch-action: manipulation;
+  font-family: inherit;
 }
 
 /* Container Principal */
 .app-container {
   width: 100%;
-  max-width: 1100px;
-  padding: 1.25rem;
+  max-width: 1080px;
+  padding: 1.5rem 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
-/* Header */
+/* ==========================================================================
+   Header Minimalista
+   ========================================================================== */
 .app-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.5rem;
-  background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
+  padding: 0.85rem 1.25rem;
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-slate);
 }
 
 .logo-area {
@@ -111,97 +130,93 @@ button, input {
 }
 
 .app-logo-img {
-  height: 52px;
-  width: auto;
-  border-radius: var(--radius-sm);
-  box-shadow: 0 0 15px rgba(245, 158, 11, 0.35);
-  border: 1px solid rgba(245, 158, 11, 0.4);
-  transition: var(--transition);
-  object-fit: contain;
+  height: 46px;
+  width: 46px;
+  border-radius: var(--radius-pill);
+  object-fit: cover;
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 16px rgba(45, 212, 191, 0.2);
+  transition: var(--transition-smooth);
 }
 
 .app-logo-img:hover {
-  transform: scale(1.05) rotate(-1deg);
-  box-shadow: 0 0 25px rgba(245, 158, 11, 0.6);
+  transform: scale(1.06) rotate(-2deg);
+  border-color: var(--petrol-accent);
 }
 
-.db-logo-img {
-  height: 42px;
-  width: auto;
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(245, 158, 11, 0.35);
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
-  object-fit: contain;
+.header-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
 }
-
-.modal-logo-img {
-  max-width: 140px;
-  height: auto;
-  border-radius: var(--radius-md);
-  margin-bottom: 1rem;
-  box-shadow: 0 0 25px rgba(245, 158, 11, 0.5);
-  border: 1px solid rgba(245, 158, 11, 0.4);
-}
-
 
 .app-title {
-  font-size: 1.35rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #ffffff, #cbd5e1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 1.2rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: var(--text-pure);
+  line-height: 1;
 }
 
 .academic-badge {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
   font-weight: 600;
-  background: rgba(99, 102, 241, 0.2);
-  color: #a5b4fc;
-  border: 1px solid rgba(99, 102, 241, 0.4);
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  color: var(--petrol-accent);
+  background: rgba(45, 212, 191, 0.08);
+  border: 1px solid rgba(45, 212, 191, 0.2);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-pill);
+  width: fit-content;
+  letter-spacing: 0.04em;
 }
 
 .header-actions {
   display: flex;
-  gap: 0.75rem;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .icon-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--glass-border);
-  color: var(--text-secondary);
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-mid);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 1rem;
   cursor: pointer;
-  transition: var(--transition);
+  transition: var(--transition-fast);
 }
 
 .icon-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  color: var(--text-primary);
-  transform: translateY(-2px);
+  background: var(--bg-surface-hover);
+  color: var(--text-pure);
+  border-color: var(--border-active);
+  transform: translateY(-1px);
 }
 
-/* Alerta Mão de 11 / Mão de Ferro */
+.icon-btn:active {
+  transform: translateY(1px);
+}
+
+/* ==========================================================================
+   Banner de Alertas (Mão de 11 / Mão de Ferro)
+   ========================================================================== */
 .alert-banner {
   display: none;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  padding: 0.85rem 1.25rem;
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: 0.95rem;
-  animation: pulse-glow 2s infinite alternate;
+  gap: 0.6rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
 }
 
 .alert-banner.active {
@@ -209,23 +224,20 @@ button, input {
 }
 
 .alert-banner.mao-11 {
-  background: rgba(245, 158, 11, 0.15);
-  border: 1px solid var(--warning-gold);
-  color: #fbbf24;
+  background: var(--gold-bg);
+  border-color: rgba(251, 191, 36, 0.4);
+  color: #fde047;
 }
 
 .alert-banner.mao-ferro {
-  background: rgba(244, 63, 94, 0.2);
-  border: 1px solid var(--team-b-color);
+  background: rgba(251, 113, 133, 0.1);
+  border-color: rgba(251, 113, 133, 0.4);
   color: #fda4af;
 }
 
-@keyframes pulse-glow {
-  0% { box-shadow: 0 0 10px rgba(245, 158, 11, 0.2); }
-  100% { box-shadow: 0 0 25px rgba(245, 158, 11, 0.5); }
-}
-
-/* Placar Principal Grid */
+/* ==========================================================================
+   Grade Principal do Placar (Duel Stage)
+   ========================================================================== */
 .scoreboard-grid {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -234,43 +246,31 @@ button, input {
 }
 
 .team-card {
-  background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-xl);
-  padding: 1.5rem;
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  overflow: hidden;
-  box-shadow: var(--shadow-card);
-  transition: var(--transition);
+  box-shadow: var(--shadow-slate);
+  transition: var(--transition-smooth);
 }
 
-.team-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
+.team-card.team-a {
+  background: linear-gradient(180deg, var(--team-a-bg) 0%, var(--bg-surface-1) 100%);
+  border-top: 2px solid var(--team-a-core);
 }
 
-.team-card.team-a::before {
-  background: var(--team-a-gradient);
-  box-shadow: 0 0 15px var(--team-a-glow);
-}
-
-.team-card.team-b::before {
-  background: var(--team-b-gradient);
-  box-shadow: 0 0 15px var(--team-b-glow);
+.team-card.team-b {
+  background: linear-gradient(180deg, var(--team-b-bg) 0%, var(--bg-surface-1) 100%);
+  border-top: 2px solid var(--team-b-core);
 }
 
 .team-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(255, 255, 255, 0.18);
+  border-color: var(--border-active);
+  box-shadow: var(--shadow-raised);
 }
 
 .team-header {
@@ -278,267 +278,275 @@ button, input {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .team-name-wrapper {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-sm);
-  padding: 0.3rem 0.65rem;
-  cursor: text;
-  transition: var(--transition);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  padding: 0.25rem 0.6rem;
+  transition: var(--transition-fast);
 }
 
 .team-name-wrapper:hover,
 .team-name-wrapper:focus-within {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: var(--accent-cyan);
-  box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--petrol-accent);
 }
 
 .team-name-input {
   background: transparent;
   border: none;
-  color: var(--text-primary);
-  font-family: var(--font-main);
-  font-size: 1.15rem;
+  color: var(--text-pure);
+  font-size: 1.05rem;
   font-weight: 800;
-  max-width: 140px;
+  letter-spacing: 0.03em;
+  max-width: 130px;
   outline: none;
-  letter-spacing: 0.02em;
-}
-
-.team-name-input::placeholder {
-  color: var(--text-muted);
-  font-weight: 500;
 }
 
 .edit-icon {
-  font-size: 0.85rem;
-  opacity: 0.5;
-  transition: var(--transition);
-  pointer-events: none;
+  font-size: 0.75rem;
+  opacity: 0.4;
+  transition: var(--transition-fast);
 }
 
 .team-name-wrapper:hover .edit-icon,
 .team-name-wrapper:focus-within .edit-icon {
   opacity: 1;
-  transform: scale(1.15);
 }
 
-
 .win-badge {
-  font-size: 0.75rem;
-  padding: 0.25rem 0.6rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text-secondary);
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-mid);
   display: flex;
   align-items: center;
   gap: 0.35rem;
 }
 
 .win-count {
-  font-weight: 700;
-  color: #fff;
+  color: var(--text-pure);
 }
 
-/* Display do Score Gigante */
+/* Placar Gigante */
 .score-display-wrapper {
-  position: relative;
+  margin: 0.75rem 0 1rem 0;
   display: flex;
-  align-items: center;
   justify-content: center;
-  margin: 1rem 0 1.5rem 0;
+  align-items: center;
   width: 100%;
 }
 
 .score-number {
-  font-size: 5.5rem;
-  font-weight: 900;
-  line-height: 1;
   font-family: var(--font-mono);
-  letter-spacing: -0.05em;
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-feature-settings: 'tnum';
+  font-size: 5.5rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .team-a .score-number {
-  color: var(--team-a-color);
-  text-shadow: 0 0 35px var(--team-a-glow);
+  color: var(--team-a-core);
 }
 
 .team-b .score-number {
-  color: var(--team-b-color);
-  text-shadow: 0 0 35px var(--team-b-glow);
+  color: var(--team-b-core);
 }
 
 .score-points-label {
-  font-size: 0.8rem;
-  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-dim);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-top: -0.5rem;
+  letter-spacing: 0.14em;
+  margin-top: -0.4rem;
   margin-bottom: 1.25rem;
 }
 
-/* Botões de Ação por Equipe */
+/* Botões de Pontuação (Tactile Action Deck) */
 .action-buttons-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.6rem;
+  gap: 0.5rem;
   width: 100%;
 }
 
 .btn-point {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--glass-border);
-  color: var(--text-primary);
-  padding: 0.75rem 0.5rem;
-  border-radius: var(--radius-md);
-  font-family: var(--font-main);
-  font-size: 0.9rem;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-high);
+  padding: 0.7rem 0.4rem;
+  border-radius: var(--radius-sm);
   font-weight: 700;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.2rem;
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
+  gap: 0.15rem;
+  transition: var(--transition-fast);
+  user-select: none;
 }
 
 .btn-point span.val {
-  font-size: 1.15rem;
   font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.1;
 }
 
 .btn-point span.label {
-  font-size: 0.65rem;
-  color: var(--text-muted);
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--text-mid);
   text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .team-a .btn-point:hover {
-  background: rgba(56, 189, 248, 0.15);
-  border-color: var(--team-a-color);
+  background: rgba(56, 189, 248, 0.12);
+  border-color: var(--team-a-core);
+  color: var(--text-pure);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px var(--team-a-glow);
 }
 
 .team-b .btn-point:hover {
-  background: rgba(244, 63, 94, 0.15);
-  border-color: var(--team-b-color);
+  background: rgba(251, 113, 133, 0.12);
+  border-color: var(--team-b-core);
+  color: var(--text-pure);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px var(--team-b-glow);
 }
 
 .btn-point:active {
-  transform: scale(0.96);
+  transform: translateY(2px) scale(0.97) !important;
 }
 
 .btn-point.btn-doze {
   grid-column: span 3;
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(99, 102, 241, 0.15));
-  border-color: rgba(139, 92, 246, 0.4);
+  background: linear-gradient(135deg, rgba(45, 212, 191, 0.08), rgba(56, 189, 248, 0.08));
+  border-color: rgba(45, 212, 191, 0.3);
 }
 
-/* Divisor Central / Info da Partida */
+.btn-point.btn-doze:hover {
+  border-color: var(--petrol-accent) !important;
+  background: rgba(45, 212, 191, 0.18) !important;
+}
+
+/* Divisor Central e Indicador da Mão */
 .match-center-info {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  padding: 1rem;
+  gap: 0.75rem;
+  padding: 0 0.5rem;
 }
 
 .vs-badge {
-  font-size: 1.2rem;
-  font-weight: 900;
   font-family: var(--font-mono);
-  color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.04);
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text-dim);
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-subtle);
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-pill);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--glass-border);
 }
 
 .round-counter-tag {
-  font-size: 0.8rem;
-  color: var(--accent-cyan);
-  font-weight: 600;
-  background: rgba(6, 182, 212, 0.1);
-  padding: 0.35rem 0.8rem;
-  border-radius: 999px;
-  border: 1px solid rgba(6, 182, 212, 0.3);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--petrol-accent);
+  background: rgba(45, 212, 191, 0.08);
+  border: 1px solid rgba(45, 212, 191, 0.25);
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
 }
 
-/* Barra de Ações Globais (Undo/Redo, Reset) */
+/* ==========================================================================
+   Barra de Ações Globais (Undo / Redo / Reset)
+   ========================================================================== */
 .global-controls-bar {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
+  gap: 0.75rem;
+  padding: 0.85rem;
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-slate);
 }
 
 .control-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--glass-border);
-  color: var(--text-primary);
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-high);
   padding: 0.65rem 1.25rem;
-  border-radius: var(--radius-md);
-  font-family: var(--font-main);
-  font-weight: 600;
-  font-size: 0.9rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  transition: var(--transition);
+  gap: 0.45rem;
+  transition: var(--transition-fast);
+  user-select: none;
 }
 
 .control-btn:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.12);
-  transform: translateY(-2px);
+  background: var(--bg-surface-hover);
+  border-color: var(--border-active);
+  color: var(--text-pure);
+  transform: translateY(-1px);
+}
+
+.control-btn:active:not(:disabled) {
+  transform: translateY(1px);
 }
 
 .control-btn:disabled {
-  opacity: 0.35;
+  opacity: 0.3;
   cursor: not-allowed;
 }
 
 .control-btn.btn-reset {
-  background: rgba(244, 63, 94, 0.1);
-  border-color: rgba(244, 63, 94, 0.3);
-  color: #fb7185;
+  background: rgba(251, 113, 133, 0.06);
+  border-color: rgba(251, 113, 133, 0.2);
+  color: #fda4af;
 }
 
 .control-btn.btn-reset:hover {
-  background: rgba(244, 63, 94, 0.2);
+  background: rgba(251, 113, 133, 0.15);
+  border-color: var(--team-b-core);
+  color: #fff;
 }
 
-/* Segmented Control / Tabs para Mobile nos TADs (Oculto em Desktop) */
+/* ==========================================================================
+   Console de TADs (Estruturas de Dados AED1)
+   ========================================================================== */
 .tads-mobile-nav {
   display: none;
 }
 
-/* Dashboard de TADs (Estruturas de Dados AED1) */
 .tads-dashboard-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1.2fr;
@@ -546,12 +554,11 @@ button, input {
 }
 
 .tad-card {
-  background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  padding: 1.25rem;
-  box-shadow: var(--shadow-card);
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.15rem;
+  box-shadow: var(--shadow-slate);
   display: flex;
   flex-direction: column;
 }
@@ -560,26 +567,27 @@ button, input {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .tad-name {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--text-high);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
 }
 
 .tad-tag {
   font-size: 0.65rem;
   font-family: var(--font-mono);
-  background: rgba(99, 102, 241, 0.15);
-  color: #a5b4fc;
-  padding: 0.15rem 0.5rem;
+  background: rgba(45, 212, 191, 0.08);
+  border: 1px solid rgba(45, 212, 191, 0.2);
+  color: var(--petrol-accent);
+  padding: 0.12rem 0.45rem;
   border-radius: 4px;
 }
 
@@ -587,204 +595,178 @@ button, input {
 .mesa-visualizer {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.5rem;
 }
 
 .mesa-player-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(255, 255, 255, 0.03);
-  padding: 0.6rem 0.85rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid transparent;
-  font-size: 0.85rem;
-  transition: var(--transition);
+  background: var(--bg-surface-2);
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.82rem;
+  transition: var(--transition-fast);
 }
 
 .mesa-player-item.is-mao {
-  border-color: var(--accent-cyan);
-  background: rgba(6, 182, 212, 0.1);
+  border-color: rgba(45, 212, 191, 0.4);
+  background: rgba(45, 212, 191, 0.06);
 }
 
 .mesa-player-item.is-distribuidor {
-  border-color: var(--warning-gold);
-  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(251, 191, 36, 0.4);
+  background: rgba(251, 191, 36, 0.06);
 }
 
 .role-badge {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
   font-weight: 700;
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
+  padding: 0.12rem 0.45rem;
+  border-radius: var(--radius-pill);
 }
 
 .role-badge.badge-mao {
-  background: var(--accent-cyan);
+  background: var(--petrol-accent);
   color: #000;
 }
 
 .role-badge.badge-distribuidor {
-  background: var(--warning-gold);
+  background: var(--gold-accent);
   color: #000;
 }
 
-/* Visualizador Pilha de Undo/Redo */
+/* Visualizador Pilha de Snapshots */
 .stack-visualizer {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.45rem;
   max-height: 220px;
   overflow-y: auto;
 }
 
 .stack-item {
-  background: rgba(255, 255, 255, 0.03);
-  padding: 0.5rem 0.75rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.8rem;
+  background: var(--bg-surface-2);
+  padding: 0.5rem 0.7rem;
+  border-radius: var(--radius-xs);
+  font-size: 0.78rem;
   font-family: var(--font-mono);
-  border-left: 3px solid var(--accent-indigo);
+  border-left: 3px solid var(--text-dim);
   display: flex;
   justify-content: space-between;
 }
 
 .stack-item.top {
-  border-left-color: var(--accent-cyan);
-  background: rgba(6, 182, 212, 0.08);
+  border-left-color: var(--petrol-accent);
+  background: rgba(45, 212, 191, 0.06);
 }
 
 /* Visualizador Lista de Histórico */
 .history-list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.45rem;
   max-height: 220px;
   overflow-y: auto;
 }
 
 .history-item {
-  background: rgba(255, 255, 255, 0.03);
-  padding: 0.6rem 0.85rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.8rem;
+  background: var(--bg-surface-2);
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-xs);
+  font-size: 0.78rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid var(--glass-border);
+  border: 1px solid var(--border-subtle);
 }
 
 .history-item.team-a-win {
-  border-left: 3px solid var(--team-a-color);
+  border-left: 3px solid var(--team-a-core);
 }
 
 .history-item.team-b-win {
-  border-left: 3px solid var(--team-b-color);
+  border-left: 3px solid var(--team-b-core);
 }
 
-/* Modal de Vitória */
+/* ==========================================================================
+   Modais & Diálogos (Arquitetura Minimalista)
+   ========================================================================== */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(8, 11, 14, 0.88);
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: none;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: 1.5rem;
+  padding: 1.25rem;
 }
 
 .modal-backdrop.active {
   display: flex;
-  animation: fadeIn 0.3s ease-out;
+  animation: modalFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modal-card {
-  background: var(--bg-secondary);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-xl);
-  padding: 2.5rem 2rem;
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-active);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 1.75rem;
   max-width: 480px;
   width: 100%;
   text-align: center;
-  box-shadow: var(--shadow-neon);
-  position: relative;
-  overflow: hidden;
+  box-shadow: var(--shadow-raised);
 }
 
 .modal-trophy {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-  animation: bounce 1s infinite alternate;
+  font-size: 3.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .modal-title {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 900;
-  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.4rem;
+  color: var(--text-pure);
 }
 
 .modal-subtitle {
-  color: var(--text-secondary);
+  color: var(--text-mid);
+  font-size: 0.92rem;
   margin-bottom: 1.5rem;
 }
 
 .modal-btn {
-  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo));
+  background: var(--petrol-accent);
   border: none;
-  color: #fff;
-  font-family: var(--font-main);
-  font-size: 1.05rem;
-  font-weight: 700;
-  padding: 0.85rem 2rem;
-  border-radius: var(--radius-md);
+  color: #000;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  box-shadow: 0 0 20px var(--accent-cyan-glow);
-  transition: var(--transition);
+  transition: var(--transition-fast);
 }
 
 .modal-btn:hover {
-  transform: translateY(-2px) scale(1.03);
+  filter: brightness(1.1);
+  transform: translateY(-1px);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes bounce {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-10px); }
-}
-
-/* Scrollbar personalizada */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 999px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-/* ==========================================================================
-   Estilos do Banco de Dados & Histórico de Partidas (Web Storage)
-   ========================================================================== */
-
+/* Modal do Banco de Dados */
 .modal-card.modal-db {
-  max-width: 680px;
+  max-width: 640px;
   width: 95%;
   max-height: 85vh;
   display: flex;
   flex-direction: column;
-  padding: 1.5rem;
+  padding: 1.25rem;
   text-align: left;
 }
 
@@ -792,9 +774,9 @@ button, input {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .db-title-area {
@@ -803,67 +785,66 @@ button, input {
   gap: 0.75rem;
 }
 
-.db-icon {
-  font-size: 1.75rem;
+.db-logo-img {
+  height: 38px;
+  width: 38px;
+  border-radius: var(--radius-pill);
+  object-fit: cover;
+  border: 1px solid var(--border-subtle);
 }
 
 .db-modal-heading {
-  font-size: 1.35rem;
+  font-size: 1.15rem;
   font-weight: 800;
-  color: var(--text-primary);
+  color: var(--text-pure);
 }
 
 .db-modal-sub {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  display: block;
+  font-size: 0.75rem;
+  color: var(--text-mid);
 }
 
 .btn-close-modal {
   background: transparent;
   border: none;
-  color: var(--text-muted);
+  color: var(--text-dim);
   font-size: 1.5rem;
   cursor: pointer;
-  padding: 0.25rem 0.5rem;
-  border-radius: var(--radius-sm);
-  transition: var(--transition);
+  padding: 0.2rem 0.5rem;
+  transition: var(--transition-fast);
 }
 
 .btn-close-modal:hover {
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-pure);
 }
 
-/* Abas */
 .db-tabs-nav {
   display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  background: rgba(0, 0, 0, 0.25);
+  gap: 0.4rem;
+  margin-bottom: 0.85rem;
+  background: var(--bg-surface-2);
   padding: 0.25rem;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border-subtle);
 }
 
 .db-tab-btn {
   flex: 1;
   background: transparent;
   border: none;
-  color: var(--text-secondary);
-  font-family: var(--font-main);
-  font-size: 0.9rem;
-  font-weight: 600;
-  padding: 0.6rem 1rem;
-  border-radius: var(--radius-sm);
+  color: var(--text-mid);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
   cursor: pointer;
-  transition: var(--transition);
+  transition: var(--transition-fast);
 }
 
 .db-tab-btn.active {
-  background: var(--accent-indigo);
-  color: #fff;
-  box-shadow: 0 0 12px rgba(99, 102, 241, 0.4);
+  background: var(--bg-surface-1);
+  color: var(--text-pure);
+  border: 1px solid var(--border-subtle);
 }
 
 .db-tab-content {
@@ -871,53 +852,46 @@ button, input {
   overflow-y: auto;
   flex: 1;
   padding-right: 0.25rem;
-  animation: fadeIn 0.2s ease-out;
 }
 
 .db-tab-content.active {
   display: block;
 }
 
-/* Container de Partidas */
 .db-matches-container {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.65rem;
 }
 
 .db-match-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
-  padding: 1rem;
-  transition: var(--transition);
-}
-
-.db-match-card:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  padding: 0.85rem;
 }
 
 .db-match-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 .db-match-date {
-  font-size: 0.75rem;
-  color: var(--text-muted);
+  font-size: 0.72rem;
+  color: var(--text-dim);
 }
 
 .db-winner-tag {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
   font-weight: 700;
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
-  background: rgba(16, 185, 129, 0.2);
-  color: #34d399;
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-pill);
+  background: rgba(52, 211, 153, 0.1);
+  color: var(--emerald-accent);
+  border: 1px solid rgba(52, 211, 153, 0.2);
 }
 
 .db-match-score-row {
@@ -925,56 +899,45 @@ button, input {
   justify-content: space-between;
   align-items: center;
   font-family: var(--font-mono);
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
-.db-team-name-a {
-  color: var(--team-a-color);
-}
-
-.db-team-name-b {
-  color: var(--team-b-color);
-}
+.db-team-name-a { color: var(--team-a-core); }
+.db-team-name-b { color: var(--team-b-core); }
 
 .db-score-pill {
-  background: rgba(0, 0, 0, 0.35);
-  padding: 0.2rem 0.75rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--glass-border);
+  background: var(--bg-app);
+  padding: 0.15rem 0.65rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-subtle);
 }
 
 .db-match-footer-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
+  font-size: 0.75rem;
+  color: var(--text-mid);
 }
 
 .btn-toggle-rounds {
   background: transparent;
-  border: 1px solid var(--glass-border);
-  color: var(--accent-cyan);
-  font-size: 0.75rem;
-  padding: 0.25rem 0.6rem;
-  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  color: var(--petrol-accent);
+  font-size: 0.72rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
   cursor: pointer;
-  transition: var(--transition);
-}
-
-.btn-toggle-rounds:hover {
-  background: var(--accent-cyan-glow);
-  color: #fff;
 }
 
 .db-rounds-collapse {
   display: none;
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
-  border-top: 1px dashed var(--glass-border);
-  gap: 0.4rem;
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--border-subtle);
+  gap: 0.35rem;
   flex-direction: column;
 }
 
@@ -985,106 +948,99 @@ button, input {
 .db-round-entry {
   display: flex;
   justify-content: space-between;
-  font-size: 0.75rem;
-  padding: 0.35rem 0.5rem;
-  background: rgba(0, 0, 0, 0.2);
+  font-size: 0.72rem;
+  padding: 0.3rem 0.5rem;
+  background: var(--bg-app);
   border-radius: 4px;
 }
 
-/* Estatísticas */
 .db-stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
-  margin-bottom: 1.25rem;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
 }
 
 .db-stat-box {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
-  padding: 1rem;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  padding: 0.85rem;
   text-align: center;
 }
 
 .db-stat-val {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 800;
   font-family: var(--font-mono);
-  color: var(--accent-cyan);
+  color: var(--petrol-accent);
 }
 
 .db-stat-lbl {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  margin-top: 0.25rem;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin-top: 0.2rem;
 }
 
 .db-ranking-heading {
-  font-size: 0.95rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 800;
+  margin-bottom: 0.45rem;
 }
 
 .db-ranking-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0.75rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-sm);
-  margin-bottom: 0.4rem;
+  padding: 0.5rem 0.7rem;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  margin-bottom: 0.35rem;
+  font-size: 0.82rem;
 }
 
-/* Rodapé do Modal */
 .db-modal-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1.25rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--glass-border);
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border-subtle);
 }
 
 .btn-db-danger {
-  background: rgba(244, 63, 94, 0.15);
-  border: 1px solid rgba(244, 63, 94, 0.3);
+  background: rgba(251, 113, 133, 0.1);
+  border: 1px solid rgba(251, 113, 133, 0.25);
   color: #fda4af;
-  font-family: var(--font-main);
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 0.6rem 1.2rem;
-  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.55rem 1rem;
+  border-radius: var(--radius-xs);
   cursor: pointer;
-  transition: var(--transition);
 }
 
 .btn-db-danger:hover {
-  background: rgba(244, 63, 94, 0.3);
-  color: #fff;
+  background: rgba(251, 113, 133, 0.2);
 }
 
-/* Toast Notifications */
+/* Toast Notificação */
 .toast-notification {
   position: fixed;
   bottom: 24px;
   left: 50%;
-  transform: translateX(-50%) translateY(100px);
-  background: rgba(17, 24, 39, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--accent-cyan);
-  box-shadow: 0 8px 25px var(--accent-cyan-glow);
-  color: #fff;
-  font-size: 0.9rem;
-  font-weight: 600;
-  padding: 0.75rem 1.5rem;
-  border-radius: 999px;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--bg-surface-2);
+  border: 1px solid var(--petrol-accent);
+  box-shadow: 0 8px 24px var(--petrol-glow);
+  color: var(--text-pure);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--radius-pill);
   pointer-events: none;
   opacity: 0;
-  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 1000;
 }
 
@@ -1093,30 +1049,42 @@ button, input {
   opacity: 1;
 }
 
+/* Scrollbars Minimalistas */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-pill);
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 /* ==========================================================================
-   Responsividade Mobile Avançada (Tablets & Smartphones)
-   Experiência Nativa de Truco com Ambos os Times Lado a Lado na Tela
+   Responsividade Mobile (Tablets & Smartphones)
+   Ambos os times lado a lado na tela simultaneamente
    ========================================================================== */
 
 @media (max-width: 768px) {
-  /* Container e Espaçamento Mobile */
   .app-container {
     padding: 0.6rem 0.5rem;
-    gap: 0.75rem;
+    gap: 0.65rem;
   }
 
-  /* Header Compacto */
   .app-header {
-    padding: 0.55rem 0.75rem;
-    border-radius: var(--radius-md);
-  }
-
-  .logo-area {
-    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
   }
 
   .app-logo-img {
     height: 38px;
+    width: 38px;
   }
 
   .app-title {
@@ -1124,8 +1092,8 @@ button, input {
   }
 
   .academic-badge {
-    font-size: 0.58rem;
-    padding: 0.12rem 0.45rem;
+    font-size: 0.55rem;
+    padding: 0.1rem 0.4rem;
   }
 
   .header-actions {
@@ -1133,170 +1101,141 @@ button, input {
   }
 
   .icon-btn {
-    width: 34px;
-    height: 34px;
-    font-size: 0.95rem;
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
   }
 
-  /* Banner de Alerta */
   .alert-banner {
-    padding: 0.6rem 0.8rem;
-    font-size: 0.82rem;
-    border-radius: var(--radius-sm);
+    padding: 0.55rem 0.75rem;
+    font-size: 0.8rem;
     margin-bottom: 0.1rem;
   }
 
-  /* Grade do Placar: 2 Colunas Lado a Lado (Melhor UX de Marcador de Truco) */
+  /* Placar 2 Colunas Lado a Lado */
   .scoreboard-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
+    gap: 0.45rem;
     align-items: stretch;
   }
 
-  /* Informação Central posicionada acima dos times */
   .match-center-info {
     grid-column: 1 / -1;
     order: -1;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 0.6rem;
-    padding: 0.1rem 0;
+    gap: 0.5rem;
+    padding: 0;
     margin-bottom: 0.1rem;
   }
 
   .vs-badge {
     width: auto;
     height: auto;
-    padding: 0.18rem 0.65rem;
-    font-size: 0.75rem;
-    font-weight: 800;
-    border-radius: 999px;
+    padding: 0.15rem 0.6rem;
+    font-size: 0.72rem;
   }
 
   .round-counter-tag {
-    font-size: 0.75rem;
-    padding: 0.18rem 0.65rem;
+    font-size: 0.72rem;
+    padding: 0.15rem 0.6rem;
   }
 
-  /* Cards dos Times */
   .team-card {
-    padding: 0.75rem 0.45rem;
-    border-radius: var(--radius-lg);
+    padding: 0.65rem 0.4rem;
+    border-radius: var(--radius-md);
   }
 
   .team-header {
     flex-direction: column;
     align-items: stretch;
-    gap: 0.35rem;
-    margin-bottom: 0.25rem;
+    gap: 0.3rem;
+    margin-bottom: 0.2rem;
   }
 
   .team-name-wrapper {
-    padding: 0.2rem 0.45rem;
-    border-radius: 6px;
+    padding: 0.2rem 0.4rem;
     width: 100%;
     justify-content: space-between;
   }
 
   .team-name-input {
-    font-size: 16px; /* Previne auto-zoom indesejado no iOS Safari */
+    font-size: 16px; /* Evita auto-zoom no Safari iOS */
     font-weight: 800;
     max-width: 100%;
     width: 100%;
     text-align: left;
   }
 
-  .edit-icon {
-    font-size: 0.75rem;
-  }
-
   .win-badge {
     align-self: center;
-    font-size: 0.68rem;
-    padding: 0.12rem 0.5rem;
+    font-size: 0.65rem;
+    padding: 0.12rem 0.45rem;
   }
 
-  /* Display de Pontos */
   .score-display-wrapper {
-    margin: 0.15rem 0 0.35rem 0;
+    margin: 0.1rem 0 0.3rem 0;
   }
 
   .score-number {
-    font-size: clamp(2.85rem, 11.5vw, 4.2rem);
-    font-weight: 900;
-    line-height: 1;
+    font-size: clamp(2.8rem, 11vw, 4.2rem);
   }
 
   .score-points-label {
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     margin-top: -0.2rem;
-    margin-bottom: 0.6rem;
-    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
   }
 
-  /* Botões de Tentos por Equipe (Grade 2 Colunas) */
   .action-buttons-grid {
     grid-template-columns: 1fr 1fr;
     gap: 0.35rem;
-    width: 100%;
   }
 
   .btn-point {
-    padding: 0.5rem 0.2rem;
-    min-height: 48px;
-    border-radius: var(--radius-sm);
+    padding: 0.5rem 0.15rem;
+    min-height: 46px;
+    border-radius: var(--radius-xs);
   }
 
   .btn-point span.val {
     font-size: 1.05rem;
-    font-weight: 800;
   }
 
   .btn-point span.label {
-    font-size: 0.6rem;
-    font-weight: 600;
+    font-size: 0.58rem;
   }
 
   .btn-point.btn-doze {
     grid-column: span 2;
-    min-height: 42px;
-    padding: 0.4rem 0.2rem;
+    min-height: 40px;
+    padding: 0.35rem 0.15rem;
   }
 
-  .btn-point.btn-doze span.val {
-    font-size: 0.95rem;
-  }
-
-  .btn-point.btn-doze span.label {
-    font-size: 0.58rem;
-  }
-
-  /* Barra Global de Ações */
   .global-controls-bar {
     padding: 0.5rem 0.6rem;
-    gap: 0.4rem;
-    border-radius: var(--radius-md);
+    gap: 0.35rem;
+    border-radius: var(--radius-sm);
   }
 
   .control-btn {
     flex: 1;
-    padding: 0.6rem 0.3rem;
-    font-size: 0.78rem;
-    font-weight: 700;
-    gap: 0.25rem;
+    padding: 0.55rem 0.25rem;
+    font-size: 0.76rem;
     justify-content: center;
-    border-radius: var(--radius-sm);
+    gap: 0.2rem;
+    border-radius: var(--radius-xs);
   }
 
-  /* Abas Segmentadas para TADs no Mobile */
+  /* Segmented Navigation para TADs no Mobile */
   .tads-mobile-nav {
     display: flex;
-    gap: 0.35rem;
-    background: rgba(0, 0, 0, 0.35);
-    padding: 0.3rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--glass-border);
+    gap: 0.3rem;
+    background: var(--bg-surface-1);
+    padding: 0.25rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
   }
 
   .tad-tab-btn {
@@ -1304,150 +1243,67 @@ button, input {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.35rem;
+    gap: 0.3rem;
     background: transparent;
     border: none;
-    color: var(--text-secondary);
-    font-family: var(--font-main);
-    font-size: 0.82rem;
+    color: var(--text-mid);
+    font-size: 0.78rem;
     font-weight: 700;
-    padding: 0.55rem 0.25rem;
-    border-radius: var(--radius-sm);
+    padding: 0.5rem 0.2rem;
+    border-radius: 4px;
     cursor: pointer;
-    transition: var(--transition);
+    transition: var(--transition-fast);
   }
 
   .tad-tab-btn.active {
-    background: var(--accent-indigo);
-    color: #fff;
-    box-shadow: 0 0 12px rgba(99, 102, 241, 0.45);
+    background: var(--bg-surface-2);
+    color: var(--text-pure);
+    border: 1px solid var(--border-subtle);
   }
 
-  /* Oculta os TADs inativos e exibe apenas o selecionado nas abas mobile */
   .tads-dashboard-container {
     display: block;
   }
 
   .tads-dashboard-container .tad-card {
     display: none;
-    padding: 1rem;
-    border-radius: var(--radius-md);
+    padding: 0.85rem;
   }
 
   .tads-dashboard-container .tad-card.mobile-visible {
     display: flex;
-    animation: fadeIn 0.2s ease-out;
+    animation: modalFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Modal Banco de Dados no Mobile */
   .modal-card.modal-db {
     width: 96vw;
     max-height: 90vh;
     padding: 1rem 0.85rem;
-    border-radius: var(--radius-lg);
   }
 
-  .db-modal-heading {
-    font-size: 1.1rem;
-  }
-
-  .db-modal-sub {
-    font-size: 0.7rem;
-  }
-
-  .db-logo-img {
-    height: 32px;
-  }
-
-  .db-tabs-nav {
-    gap: 0.3rem;
-    padding: 0.2rem;
-  }
-
-  .db-tab-btn {
-    font-size: 0.78rem;
-    padding: 0.45rem 0.5rem;
-  }
-
-  .db-stats-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.4rem;
-  }
-
-  .db-stat-box {
-    padding: 0.6rem 0.3rem;
-  }
-
-  .db-stat-val {
-    font-size: 1.25rem;
-  }
-
-  .db-stat-lbl {
-    font-size: 0.65rem;
-  }
-
-  .db-match-card {
-    padding: 0.75rem;
-  }
-
-  .db-match-score-row {
-    font-size: 0.95rem;
-  }
-
-  .db-modal-footer {
-    margin-top: 0.75rem;
-    padding-top: 0.75rem;
-  }
-
-  .btn-db-danger, .db-modal-footer .modal-btn {
-    font-size: 0.8rem;
-    padding: 0.5rem 0.8rem;
-  }
-
-  /* Modal de Vitória no Mobile */
   .modal-card {
     padding: 1.75rem 1.25rem;
     width: 94vw;
   }
 
   .modal-trophy {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
+    font-size: 2.8rem;
   }
 
   .modal-title {
-    font-size: 1.4rem;
-  }
-
-  .modal-subtitle {
-    font-size: 0.88rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .modal-btn {
-    padding: 0.75rem 1.5rem;
-    font-size: 0.95rem;
-    width: 100%;
-  }
-
-  .toast-notification {
-    font-size: 0.8rem;
-    padding: 0.6rem 1.2rem;
-    bottom: 16px;
-    max-width: 90vw;
-    text-align: center;
+    font-size: 1.35rem;
   }
 }
 
-/* Telas Muito Pequenas (Ex: iPhone SE, Galaxy A0x <= 380px) */
+/* Telas Extremamente Pequenas (<= 380px) */
 @media (max-width: 380px) {
   .app-container {
-    padding: 0.4rem 0.35rem;
-    gap: 0.55rem;
+    padding: 0.4rem 0.3rem;
+    gap: 0.5rem;
   }
 
   .app-header {
-    padding: 0.45rem 0.6rem;
+    padding: 0.4rem 0.55rem;
   }
 
   .app-title {
@@ -1461,42 +1317,18 @@ button, input {
   .icon-btn {
     width: 30px;
     height: 30px;
-    font-size: 0.85rem;
-  }
-
-  .scoreboard-grid {
-    gap: 0.35rem;
+    font-size: 0.82rem;
   }
 
   .team-card {
-    padding: 0.55rem 0.3rem;
-  }
-
-  .team-name-input {
-    font-size: 15px;
+    padding: 0.5rem 0.25rem;
   }
 
   .score-number {
-    font-size: 2.6rem;
+    font-size: 2.5rem;
   }
 
   .btn-point {
-    min-height: 44px;
-    padding: 0.45rem 0.1rem;
-  }
-
-  .btn-point span.val {
-    font-size: 0.95rem;
-  }
-
-  .btn-point span.label {
-    font-size: 0.55rem;
-  }
-
-  .control-btn {
-    font-size: 0.72rem;
-    padding: 0.5rem 0.2rem;
+    min-height: 42px;
   }
 }
-
-
