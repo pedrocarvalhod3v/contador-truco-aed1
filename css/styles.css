@@ -288,37 +288,29 @@ button, input {
 .team-card {
   background: linear-gradient(180deg, rgba(220, 38, 38, 0.08) 0%, var(--bg-surface-1) 100%);
   border: 1px solid var(--border-red);
+  border-top: 3px solid var(--red-primary);
   border-radius: var(--radius-lg);
   padding: 1.6rem 1.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
+  overflow: hidden;
   box-shadow: var(--shadow-card);
   transition: var(--transition-smooth);
 }
 
-.team-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--red-primary);
-  box-shadow: 0 0 12px var(--red-glow);
+.team-card.team-a {
+  border-top-color: #ef4444;
 }
 
-.team-card.team-a::before {
-  background: linear-gradient(90deg, #b91c1c, #ef4444);
-}
-
-.team-card.team-b::before {
-  background: linear-gradient(90deg, #ef4444, #b91c1c);
+.team-card.team-b {
+  border-top-color: #dc2626;
 }
 
 .team-card:hover {
   border-color: var(--border-red-active);
+  border-top-color: #ef4444;
   box-shadow: var(--shadow-raised);
 }
 
@@ -383,6 +375,15 @@ button, input {
   display: flex;
   align-items: center;
   gap: 0.35rem;
+}
+
+.trophy-badge-img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  filter: invert(1);
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .win-count {
@@ -784,8 +785,18 @@ button, input {
 }
 
 .modal-trophy {
-  font-size: 3.5rem;
   margin-bottom: 0.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.victory-modal-trophy-img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  filter: invert(1) drop-shadow(0 0 16px var(--red-glow));
+  animation: bounce 1.2s infinite alternate;
 }
 
 .modal-title {
