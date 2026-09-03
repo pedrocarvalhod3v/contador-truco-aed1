@@ -39,7 +39,7 @@
       </div>
       <div class="header-actions">
         <button id="btn-install-app" class="icon-btn" style="display:none;" title="Instalar Aplicativo no Celular" aria-label="Instalar no celular">
-          📲
+          <img src="assets/icons/install.svg" alt="Instalar" class="header-action-img">
         </button>
         <button id="btn-save-game" class="icon-btn" title="Salvar Partida Atual (Snapshot)" aria-label="Salvar jogo">
           <img src="assets/save-icon.png" alt="Salvar" class="header-action-img">
@@ -48,7 +48,7 @@
           <img src="assets/load-icon.png" alt="Carregar" class="header-action-img header-folder-img">
         </button>
         <button id="btn-open-db" class="icon-btn" title="Banco de Dados & Histórico de Partidas" aria-label="Abrir banco de dados">
-          🗄️
+          <img src="assets/icons/database.svg" alt="Banco de Dados" class="header-action-img">
         </button>
         <button id="btn-toggle-sound" class="icon-btn" title="Ativar/Desativar Sons Táteis" aria-label="Alternar som">
           <img src="assets/volume-icon.png" alt="Volume" class="volume-btn-img" id="img-volume">
@@ -61,7 +61,7 @@
 
     <!-- Banner Dinâmico para Mão de 11 / Mão de Ferro -->
     <section id="alert-banner" class="alert-banner" role="alert" aria-live="polite">
-      <span id="alert-icon">⚠️</span>
+      <img src="assets/icons/warning.svg" alt="Alerta" class="alert-icon-img" id="alert-icon">
       <span id="alert-text">Mão de 11! Não é permitido pedir truco.</span>
     </section>
 
@@ -73,7 +73,7 @@
         <div class="team-header">
           <div class="team-name-wrapper" title="Clique para personalizar o nome da equipe">
             <input type="text" id="input-team-a" class="team-name-input" value="NÓS" maxlength="16" placeholder="Equipe A" aria-label="Nome da Equipe A">
-            <span class="edit-icon" aria-hidden="true">✏️</span>
+            <img src="assets/icons/pencil.svg" alt="Editar" class="edit-icon-img" aria-hidden="true">
           </div>
           <div class="win-badge" title="Vitórias Acumuladas">
             <img src="assets/trophy-icon.png" alt="Troféu" class="trophy-badge-img"> <span id="wins-a" class="win-count">0</span>
@@ -121,7 +121,7 @@
         <div class="team-header">
           <div class="team-name-wrapper" title="Clique para personalizar o nome da equipe">
             <input type="text" id="input-team-b" class="team-name-input" value="ELES" maxlength="16" placeholder="Equipe B" aria-label="Nome da Equipe B">
-            <span class="edit-icon" aria-hidden="true">✏️</span>
+            <img src="assets/icons/pencil.svg" alt="Editar" class="edit-icon-img" aria-hidden="true">
           </div>
           <div class="win-badge" title="Vitórias Acumuladas">
             <img src="assets/trophy-icon.png" alt="Troféu" class="trophy-badge-img"> <span id="wins-b" class="win-count">0</span>
@@ -163,21 +163,27 @@
     <!-- Barra de Controle Global: Undo / Redo / Nova Partida -->
     <section class="global-controls-bar" aria-label="Ações Rápidas">
       <button id="btn-undo" class="control-btn" disabled aria-label="Desfazer última pontuação">
-        <span>⏪</span> Desfazer (Undo)
+        <img src="assets/icons/undo.svg" alt="Desfazer" class="btn-ctrl-img"> Desfazer (Undo)
       </button>
       <button id="btn-redo" class="control-btn" disabled aria-label="Refazer pontuação desfeita">
-        <span>⏩</span> Refazer (Redo)
+        <img src="assets/icons/redo.svg" alt="Refazer" class="btn-ctrl-img"> Refazer (Redo)
       </button>
       <button id="btn-new-match" class="control-btn btn-reset" aria-label="Iniciar nova partida">
-        <span>🆕</span> Nova Partida
+        <img src="assets/icons/new-game.svg" alt="Nova Partida" class="btn-ctrl-img"> Nova Partida
       </button>
     </section>
 
     <!-- Dashboard de TADs (Estruturas de Dados AED1 em Tempo Real) -->
     <div class="tads-mobile-nav" id="tads-mobile-nav" role="tablist" aria-label="Abas de Estruturas de Dados">
-      <button class="tad-tab-btn active" data-target="tad-fila-card" role="tab" aria-selected="true"><span>🔄</span> Mesa</button>
-      <button class="tad-tab-btn" data-target="tad-pilha-card" role="tab" aria-selected="false"><span>🥞</span> Snapshots</button>
-      <button class="tad-tab-btn" data-target="tad-lista-card" role="tab" aria-selected="false"><span>📜</span> Histórico</button>
+      <button class="tad-tab-btn active" data-target="tad-fila-card" role="tab" aria-selected="true">
+        <img src="assets/icons/queue.svg" alt="Mesa" class="tad-tab-img"> Mesa
+      </button>
+      <button class="tad-tab-btn" data-target="tad-pilha-card" role="tab" aria-selected="false">
+        <img src="assets/icons/stack.svg" alt="Pilha" class="tad-tab-img"> Snapshots
+      </button>
+      <button class="tad-tab-btn" data-target="tad-lista-card" role="tab" aria-selected="false">
+        <img src="assets/icons/history.svg" alt="Histórico" class="tad-tab-img"> Histórico
+      </button>
     </div>
 
     <section class="tads-dashboard-container" aria-label="Estruturas de Dados do Jogo">
@@ -185,7 +191,7 @@
       <!-- TAD Fila Circular: Gestão da Mesa e Turnos -->
       <article class="tad-card mobile-visible" id="tad-fila-card">
         <header class="tad-card-header">
-          <h2 class="tad-name"><span>🔄</span> Mesa (TAD Fila)</h2>
+          <h2 class="tad-name"><img src="assets/icons/queue.svg" alt="Mesa" class="tad-header-img"> Mesa (TAD Fila)</h2>
           <span class="tad-tag">FIFO • O(1)</span>
         </header>
         <div id="mesa-list" class="mesa-visualizer">
@@ -196,7 +202,7 @@
       <!-- TAD Pilha: Histórico de Snapshots para Undo/Redo -->
       <article class="tad-card" id="tad-pilha-card">
         <header class="tad-card-header">
-          <h2 class="tad-name"><span>🥞</span> Snapshots (TAD Pilha)</h2>
+          <h2 class="tad-name"><img src="assets/icons/stack.svg" alt="Snapshots" class="tad-header-img"> Snapshots (TAD Pilha)</h2>
           <span class="tad-tag">LIFO • O(1)</span>
         </header>
         <div id="stack-list" class="stack-visualizer">
@@ -207,7 +213,7 @@
       <!-- TAD Lista Encadeada: Histórico das Mãos Jogadas -->
       <article class="tad-card" id="tad-lista-card">
         <header class="tad-card-header">
-          <h2 class="tad-name"><span>📜</span> Histórico (TAD Lista)</h2>
+          <h2 class="tad-name"><img src="assets/icons/history.svg" alt="Histórico" class="tad-header-img"> Histórico (TAD Lista)</h2>
           <span class="tad-tag">Dinâmica • O(N)</span>
         </header>
         <div id="history-list" class="history-list">
@@ -247,8 +253,12 @@
 
       <!-- Abas do Banco de Dados -->
       <nav class="db-tabs-nav" aria-label="Navegação do Banco">
-        <button id="tab-btn-matches" class="db-tab-btn active">📜 Partidas Arquivadas</button>
-        <button id="tab-btn-stats" class="db-tab-btn">📊 Estatísticas & Ranking</button>
+        <button id="tab-btn-matches" class="db-tab-btn active">
+          <img src="assets/icons/history.svg" alt="Partidas" class="tab-btn-img"> Partidas Arquivadas
+        </button>
+        <button id="tab-btn-stats" class="db-tab-btn">
+          <img src="assets/icons/chart.svg" alt="Estatísticas" class="tab-btn-img"> Estatísticas & Ranking
+        </button>
       </nav>
 
       <!-- Conteúdo da Aba: Partidas Arquivadas -->
@@ -267,7 +277,9 @@
 
       <!-- Rodapé do Modal com Ações -->
       <div class="db-modal-footer">
-        <button id="btn-clear-db" class="btn-db-danger">🗑️ Limpar Banco</button>
+        <button id="btn-clear-db" class="btn-db-danger">
+          <img src="assets/icons/trash.svg" alt="Limpar" class="btn-danger-img"> Limpar Banco
+        </button>
         <button id="btn-close-db-modal" class="modal-btn">Fechar</button>
       </div>
     </div>

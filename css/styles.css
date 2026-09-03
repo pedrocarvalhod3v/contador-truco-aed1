@@ -275,6 +275,23 @@ button, input {
   box-shadow: 0 0 20px var(--red-glow);
 }
 
+.alert-icon-img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.alert-banner.mao-11 .alert-icon-img {
+  filter: invert(77%) sepia(85%) saturate(760%) hue-rotate(357deg) brightness(101%) contrast(97%);
+}
+
+.alert-banner.mao-ferro .alert-icon-img {
+  filter: invert(36%) sepia(84%) saturate(4155%) hue-rotate(345deg) brightness(97%) contrast(94%);
+}
+
 /* ==========================================================================
    Grade Principal do Placar (Cards Vermelhos e Pretos)
    ========================================================================== */
@@ -352,14 +369,22 @@ button, input {
   text-transform: uppercase;
 }
 
-.edit-icon {
+.edit-icon,
+.edit-icon-img {
   font-size: 0.75rem;
-  opacity: 0.4;
+  width: 13px;
+  height: 13px;
+  object-fit: contain;
+  filter: invert(1);
+  opacity: 0.45;
   transition: var(--transition-fast);
+  pointer-events: none;
 }
 
 .team-name-wrapper:hover .edit-icon,
-.team-name-wrapper:focus-within .edit-icon {
+.team-name-wrapper:hover .edit-icon-img,
+.team-name-wrapper:focus-within .edit-icon,
+.team-name-wrapper:focus-within .edit-icon-img {
   opacity: 1;
 }
 
@@ -600,6 +625,16 @@ button, input {
   box-shadow: 0 0 15px var(--red-glow);
 }
 
+.btn-ctrl-img {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+  filter: invert(1);
+  display: inline-block;
+  vertical-align: middle;
+  pointer-events: none;
+}
+
 /* ==========================================================================
    Console de TADs (Estruturas de Dados AED1)
    ========================================================================== */
@@ -640,6 +675,24 @@ button, input {
   display: flex;
   align-items: center;
   gap: 0.45rem;
+}
+
+.tad-header-img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  filter: invert(1);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.tad-tab-img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  filter: invert(1);
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .tad-tag {
@@ -914,7 +967,21 @@ button, input {
   padding: 0.5rem 0.8rem;
   border-radius: 4px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
   transition: var(--transition-fast);
+}
+
+.tab-btn-img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  filter: invert(1);
+  display: inline-block;
+  vertical-align: middle;
+  pointer-events: none;
 }
 
 .db-tab-btn.active {
@@ -1096,6 +1163,20 @@ button, input {
   padding: 0.55rem 1rem;
   border-radius: var(--radius-xs);
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: var(--transition-fast);
+}
+
+.btn-danger-img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  filter: invert(1);
+  display: inline-block;
+  vertical-align: middle;
+  pointer-events: none;
 }
 
 .btn-db-danger:hover {

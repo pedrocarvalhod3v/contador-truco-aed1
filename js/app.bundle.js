@@ -807,11 +807,11 @@ function atualizarInterface() {
       alertBanner.className = 'alert-banner active';
       if (status11.maoDeFerro) {
         alertBanner.classList.add('mao-ferro');
-        if (alertText) alertText.textContent = "⚔️ MÃO DE FERRO (11 x 11)! Jogo às escuras.";
+        if (alertText) alertText.textContent = "MÃO DE FERRO (11 x 11)! Jogo às escuras.";
       } else {
         alertBanner.classList.add('mao-11');
         const time11 = status11.equipe === 'A' ? placar.nomeEquipeA : placar.nomeEquipeB;
-        if (alertText) alertText.textContent = `⚠️ MÃO DE 11 para ${time11}! Proibido pedir truco.`;
+        if (alertText) alertText.textContent = `MÃO DE 11 para ${time11}! Proibido pedir truco.`;
       }
     } else {
       alertBanner.className = 'alert-banner';
@@ -826,7 +826,7 @@ function atualizarInterface() {
 
   if (placar.temVencedor()) {
     const vencedor = placar.obterVencedor();
-    if (victoryTitle) victoryTitle.textContent = `🏆 ${vencedor.toUpperCase()} VENCEU! 🏆`;
+    if (victoryTitle) victoryTitle.textContent = `${vencedor.toUpperCase()} VENCEU!`;
     if (victoryMessage) victoryMessage.textContent = `Parabéns! ${vencedor} atingiu os 12 tentos e fechou a queda!`;
     if (victoryModal) victoryModal.classList.add('active');
     audio.tocarVitoria();
@@ -834,7 +834,7 @@ function atualizarInterface() {
     if (!partidaSalvaNoHistorico) {
       StorageManager.salvarPartidaFinalizada(partida);
       partidaSalvaNoHistorico = true;
-      mostrarToast(`💾 Partida arquivada no Banco de Dados!`);
+      mostrarToast(`Partida arquivada no Banco de Dados!`);
     }
   }
 }
@@ -881,7 +881,7 @@ function renderizarTADPilha() {
     const item = document.createElement('div');
     item.className = `stack-item ${idx === 0 ? 'top' : ''}`;
     item.innerHTML = `
-      <span>${idx === 0 ? '🔼 Topo: ' : ''}${snap.descricao}</span>
+      <span>${idx === 0 ? 'Topo: ' : ''}${snap.descricao}</span>
       <span>[${snap.pontosA} x ${snap.pontosB}]</span>
     `;
     stackListEl.appendChild(item);
@@ -921,7 +921,7 @@ function renderizarHistoricoBanco() {
   if (partidas.length === 0) {
     dbMatchesList.innerHTML = `
       <div style="text-align:center;padding:2rem;color:var(--text-muted);">
-        <p style="font-size:2rem;margin-bottom:0.5rem;">📭</p>
+        <div style="margin-bottom:0.5rem;"><img src="assets/icons/history.svg" style="width:32px;height:32px;opacity:0.3;filter:invert(1);" alt=""></div>
         <p>Nenhuma partida arquivada no banco ainda.</p>
         <p style="font-size:0.8rem;">Complete uma partida até 12 tentos para registrar automaticamente!</p>
       </div>
@@ -945,8 +945,8 @@ function renderizarHistoricoBanco() {
 
     card.innerHTML = `
       <div class="db-match-header">
-        <span class="db-match-date">📅 ${dataFormatada}</span>
-        <span class="db-winner-tag">🏆 Vencedor: ${p.vencedor}</span>
+        <span class="db-match-date"><img src="assets/icons/history.svg" style="width:12px;height:12px;filter:invert(1);opacity:0.6;vertical-align:middle;margin-right:4px;">${dataFormatada}</span>
+        <span class="db-winner-tag"><img src="assets/trophy-icon.png" style="width:12px;height:12px;filter:invert(1);vertical-align:middle;margin-right:4px;">Vencedor: ${p.vencedor}</span>
       </div>
       <div class="db-match-score-row">
         <span class="db-team-name-a">${p.equipeA}</span>
@@ -1006,7 +1006,7 @@ function renderizarEstatisticasBanco() {
       </div>
     </div>
 
-    <h3 class="db-ranking-heading">🏆 Ranking de Vitórias por Equipe</h3>
+    <h3 class="db-ranking-heading"><img src="assets/trophy-icon.png" style="width:15px;height:15px;filter:invert(1);vertical-align:middle;margin-right:6px;">Ranking de Vitórias por Equipe</h3>
     <div class="db-ranking-list">
       ${rankingHtml}
     </div>
@@ -1074,7 +1074,7 @@ if (btnResetAll) {
       partidaSalvaNoHistorico = false;
       audio.tocarClique();
       atualizarInterface();
-      mostrarToast("🔄 Placar e histórico da sessão reiniciados!");
+      mostrarToast("Placar e histórico da sessão reiniciados!");
     }
   });
 }
@@ -1122,14 +1122,14 @@ if (btnSaveGame) {
   btnSaveGame.addEventListener('click', () => {
     StorageManager.salvarEstadoAtual(partida);
     audio.tocarClique();
-    mostrarToast("💾 Partida salva com sucesso no Banco de Dados local!");
+    mostrarToast("Partida salva com sucesso no Banco de Dados local!");
   });
 }
 
 if (btnLoadGame) {
   btnLoadGame.addEventListener('click', () => {
     if (!StorageManager.existeJogoSalvo()) {
-      mostrarToast("⚠️ Nenhuma partida salva encontrada.");
+      mostrarToast("Nenhuma partida salva encontrada.");
       return;
     }
     const dados = StorageManager.carregarEstadoSalvo();
@@ -1138,7 +1138,7 @@ if (btnLoadGame) {
       partidaSalvaNoHistorico = partida.placar.temVencedor();
       audio.tocarClique();
       atualizarInterface();
-      mostrarToast("📂 Partida e TADs restaurados com sucesso!");
+      mostrarToast("Partida e TADs restaurados com sucesso!");
     }
   });
 }
@@ -1184,7 +1184,7 @@ if (btnClearDb) {
       StorageManager.limparTodoHistorico();
       renderizarHistoricoBanco();
       renderizarEstatisticasBanco();
-      mostrarToast("🗑️ Histórico do Banco de Dados limpo!");
+      mostrarToast("Histórico do Banco de Dados limpo!");
     }
   });
 }
@@ -1241,7 +1241,7 @@ if (btnInstallApp) {
       deferredPrompt.prompt();
       const { outcome } = await deferredPrompt.userChoice;
       if (outcome === 'accepted') {
-        mostrarToast("🎉 Aplicativo instalado com sucesso!");
+        mostrarToast("Aplicativo instalado com sucesso!");
       }
       deferredPrompt = null;
       btnInstallApp.style.display = 'none';
